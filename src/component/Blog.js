@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { postApi } from '../service/postApi';
 import Post from './Post';
 // import { postApi } from '../service/postApi';
-import axios from 'axios';
+// import axios from 'axios';
 
 const Blog = () => {
   const [post, setPost] = useState([]);
@@ -9,7 +10,7 @@ const Blog = () => {
 
   const getPost = async () => {
     try {
-      const res = await axios.get('/api/post/');
+      const res = await postApi.get('/api/post');
       setPost(res.data.data);
       setLoadding(false);
       console.log(res.data.data);

@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
-import Select from "react-select";
-import { postApi } from "../service/postApi";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { useState, useEffect } from 'react';
+import Select from 'react-select';
+import { postApi } from '../service/postApi';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Home() {
   //set all tags
   const options = [
-    { value: "Javascript", label: "Javascript" },
-    { value: "Full Stack", label: "Full Stack" },
-    { value: "Node Js", label: "Node Js" },
-    { value: "Express", label: "Express" },
+    { value: 'Javascript', label: 'Javascript' },
+    { value: 'Full Stack', label: 'Full Stack' },
+    { value: 'Node Js', label: 'Node Js' },
+    { value: 'Express', label: 'Express' },
   ];
   const navigate = useNavigate();
-  const logToken = JSON.parse(localStorage.getItem("token"));
+  const logToken = JSON.parse(localStorage.getItem('token'));
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
   const [imgUrl, setImgUrl] = useState(null);
 
@@ -48,21 +48,27 @@ function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("file", file);
-    formData.append("tags", tags);
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('file', file);
+    formData.append('tags', tags);
 
     try {
-      const sendPostData = await postApi.post("/create-post", formData, config);
+      const sendPostData = await postApi.post(
+        '/api/post/create-post',
+        formData,
+        config
+      );
       const resSucess = sendPostData.data.msg;
       console.log(sendPostData);
+      console.log('inside try catch');
       toast.success(resSucess);
     } catch (error) {
       const resError = error.response.data.fail;
       const expressError = error.response.data.errors;
       console.log(expressError ? expressError : null);
       console.log(resError ? resError : null);
+      console.log(error);
       toast.error(resError);
 
       expressError.map((singleError) => toast.error(singleError.msg));
@@ -71,7 +77,7 @@ function Home() {
 
   useEffect(() => {
     if (!logToken) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [logToken, navigate]);
 
@@ -97,7 +103,7 @@ function Home() {
           <div className="col-md-2">
             <div
               className="d-flex flex-shrink-0 min-vh-100 flex-column bg-dark p-3"
-              style={{ width: "280px" }}
+              style={{ width: '280px' }}
             >
               <ul className="nav nav-pills flex-column mb-auto">
                 <li>

@@ -12,7 +12,7 @@ const Login = () => {
 
   const loginHandaler = async (e) => {
     e.preventDefault();
-    let logAttemt = await userApi.post('/api/post', login);
+    let logAttemt = await userApi.post('/api/user/login', login);
     const token = logAttemt.data.token;
     localStorage.setItem('token', JSON.stringify(token));
     navigate('/home');
