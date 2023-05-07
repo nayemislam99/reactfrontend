@@ -1,8 +1,8 @@
 import axios from 'axios';
 export const postApi = axios.create({
-  baseURL: 'https://server.dosbubble.com/api/post',
+  baseURL: 'https://spiky-wave-production.up.railway.app/api/post',
 });
 
 export const userApi = axios.create({
-  baseURL: 'https://server.dosbubble.com/api/user',
+  baseURL: 'https://spiky-wave-production.up.railway.app/api/user',
 });
